@@ -1,0 +1,9 @@
+D:\SolucionRetail\CapaDatos\bin\Debug\CapaDatos.dll.config
+D:\SolucionRetail\CapaDatos\bin\Debug\CapaDatos.dll
+D:\SolucionRetail\CapaDatos\bin\Debug\CapaDatos.pdb
+D:\SolucionRetail\CapaDatos\bin\Debug\EntityFramework.dll
+D:\SolucionRetail\CapaDatos\bin\Debug\EntityFramework.SqlServer.dll
+D:\SolucionRetail\CapaDatos\bin\Debug\EntityFramework.xml
+D:\SolucionRetail\CapaDatos\bin\Debug\EntityFramework.SqlServer.xml
+D:\SolucionRetail\CapaDatos\obj\Debug\CapaDatos.dll
+D:\SolucionRetail\CapaDatos\obj\Debug\CapaDatos.pdb

@@ -1,0 +1,12 @@
+D:\SolucionRetail\CapaNegocio\obj\Debug\CapaNegocio.csprojResolveAssemblyReference.cache
+D:\SolucionRetail\CapaNegocio\bin\Debug\CapaNegocio.dll.config
+D:\SolucionRetail\CapaNegocio\bin\Debug\CapaNegocio.dll
+D:\SolucionRetail\CapaNegocio\bin\Debug\CapaNegocio.pdb
+D:\SolucionRetail\CapaNegocio\bin\Debug\CapaDatos.dll
+D:\SolucionRetail\CapaNegocio\bin\Debug\EntityFramework.dll
+D:\SolucionRetail\CapaNegocio\bin\Debug\EntityFramework.SqlServer.dll
+D:\SolucionRetail\CapaNegocio\bin\Debug\CapaDatos.pdb
+D:\SolucionRetail\CapaNegocio\bin\Debug\EntityFramework.xml
+D:\SolucionRetail\CapaNegocio\bin\Debug\EntityFramework.SqlServer.xml
+D:\SolucionRetail\CapaNegocio\obj\Debug\CapaNegocio.dll
+D:\SolucionRetail\CapaNegocio\obj\Debug\CapaNegocio.pdb

@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BaseDatosRetailModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="Id_Cliente" />
+    </Key>
+    <Property Name="Id_Cliente" Type="Int32" Nullable="false" />
+    <Property Name="Nombre_Cliente" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Tarjeta" Relationship="Self.Retail_Tarjeta_FK1" FromRole="Cliente" ToRole="Tarjeta" />
+  </EntityType>
+  <EntityType Name="Producto">
+    <Key>
+      <PropertyRef Name="Id_producto" />
+    </Key>
+    <Property Name="Id_producto" Type="Int32" Nullable="false" />
+    <Property Name="Nombre_producto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Marca_producto" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Precio_producto" Type="Int32" Nullable="false" />
+    <Property Name="Stock_producto" Type="Int32" Nullable="false" />
+    <Property Name="Fecha_Termino_Subasta" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Id_Retail" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Retail" Relationship="Self.Retail_Producto_FK1" FromRole="Producto" ToRole="Retail" />
+  </EntityType>
+  <EntityType Name="Retail">
+    <Key>
+      <PropertyRef Name="Id_Retail" />
+    </Key>
+    <Property Name="Id_Retail" Type="Int32" Nullable="false" />
+    <Property Name="Nombre_Retail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Direccion_Retail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Producto" Relationship="Self.Retail_Producto_FK1" FromRole="Retail" ToRole="Producto" />
+  </EntityType>
+  <EntityType Name="Tarjeta">
+    <Key>
+      <PropertyRef Name="Id_tarjeta" />
+    </Key>
+    <Property Name="Id_tarjeta" Type="Int32" Nullable="false" />
+    <Property Name="saldo_tarjeta" Type="Int32" Nullable="false" />
+    <Property Name="linea_credito_tarjeta" Type="Int32" Nullable="false" />
+    <Property Name="Id_Cliente" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Cliente" Relationship="Self.Retail_Tarjeta_FK1" FromRole="Tarjeta" ToRole="Cliente" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="Id_usuario" />
+    </Key>
+    <Property Name="Id_usuario" Type="Int32" Nullable="false" />
+    <Property Name="Pass_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <Association Name="Retail_Tarjeta_FK1">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+    <End Role="Tarjeta" Type="Self.Tarjeta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="Id_Cliente" />
+      </Principal>
+      <Dependent Role="Tarjeta">
+        <PropertyRef Name="Id_Cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Retail_Producto_FK1">
+    <End Role="Retail" Type="Self.Retail" Multiplicity="1" />
+    <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Retail">
+        <PropertyRef Name="Id_Retail" />
+      </Principal>
+      <Dependent Role="Producto">
+        <PropertyRef Name="Id_Retail" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BaseDatosRetailEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+    <EntitySet Name="Producto" EntityType="Self.Producto" />
+    <EntitySet Name="Retail" EntityType="Self.Retail" />
+    <EntitySet Name="Tarjeta" EntityType="Self.Tarjeta" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+    <AssociationSet Name="Retail_Tarjeta_FK1" Association="Self.Retail_Tarjeta_FK1">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="Tarjeta" EntitySet="Tarjeta" />
+    </AssociationSet>
+    <AssociationSet Name="Retail_Producto_FK1" Association="Self.Retail_Producto_FK1">
+      <End Role="Retail" EntitySet="Retail" />
+      <End Role="Producto" EntitySet="Producto" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

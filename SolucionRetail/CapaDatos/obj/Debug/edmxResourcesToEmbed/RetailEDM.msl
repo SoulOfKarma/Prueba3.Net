@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BaseDatosRetailModelStoreContainer" CdmEntityContainer="BaseDatosRetailEntities">
+    <EntitySetMapping Name="Cliente">
+      <EntityTypeMapping TypeName="BaseDatosRetailModel.Cliente">
+        <MappingFragment StoreEntitySet="Cliente">
+          <ScalarProperty Name="Id_Cliente" ColumnName="Id_Cliente" />
+          <ScalarProperty Name="Nombre_Cliente" ColumnName="Nombre_Cliente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Producto">
+      <EntityTypeMapping TypeName="BaseDatosRetailModel.Producto">
+        <MappingFragment StoreEntitySet="Producto">
+          <ScalarProperty Name="Id_producto" ColumnName="Id_producto" />
+          <ScalarProperty Name="Nombre_producto" ColumnName="Nombre_producto" />
+          <ScalarProperty Name="Marca_producto" ColumnName="Marca_producto" />
+          <ScalarProperty Name="Precio_producto" ColumnName="Precio_producto" />
+          <ScalarProperty Name="Stock_producto" ColumnName="Stock_producto" />
+          <ScalarProperty Name="Fecha_Termino_Subasta" ColumnName="Fecha_Termino_Subasta" />
+          <ScalarProperty Name="Id_Retail" ColumnName="Id_Retail" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Retail">
+      <EntityTypeMapping TypeName="BaseDatosRetailModel.Retail">
+        <MappingFragment StoreEntitySet="Retail">
+          <ScalarProperty Name="Id_Retail" ColumnName="Id_Retail" />
+          <ScalarProperty Name="Nombre_Retail" ColumnName="Nombre_Retail" />
+          <ScalarProperty Name="Direccion_Retail" ColumnName="Direccion_Retail" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tarjeta">
+      <EntityTypeMapping TypeName="BaseDatosRetailModel.Tarjeta">
+        <MappingFragment StoreEntitySet="Tarjeta">
+          <ScalarProperty Name="Id_tarjeta" ColumnName="Id_tarjeta" />
+          <ScalarProperty Name="saldo_tarjeta" ColumnName="saldo_tarjeta" />
+          <ScalarProperty Name="linea_credito_tarjeta" ColumnName="linea_credito_tarjeta" />
+          <ScalarProperty Name="Id_Cliente" ColumnName="Id_Cliente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuario">
+      <EntityTypeMapping TypeName="BaseDatosRetailModel.Usuario">
+        <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
+          <ScalarProperty Name="Pass_usuario" ColumnName="Pass_usuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

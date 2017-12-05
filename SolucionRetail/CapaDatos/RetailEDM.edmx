@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BaseDatosRetailModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="Id_Cliente" />
+          </Key>
+          <Property Name="Id_Cliente" Type="int" Nullable="false" />
+          <Property Name="Nombre_Cliente" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="Id_producto" />
+          </Key>
+          <Property Name="Id_producto" Type="int" Nullable="false" />
+          <Property Name="Nombre_producto" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Marca_producto" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Precio_producto" Type="int" Nullable="false" />
+          <Property Name="Stock_producto" Type="int" Nullable="false" />
+          <Property Name="Fecha_Termino_Subasta" Type="date" Nullable="false" />
+          <Property Name="Id_Retail" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Retail">
+          <Key>
+            <PropertyRef Name="Id_Retail" />
+          </Key>
+          <Property Name="Id_Retail" Type="int" Nullable="false" />
+          <Property Name="Nombre_Retail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Direccion_Retail" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tarjeta">
+          <Key>
+            <PropertyRef Name="Id_tarjeta" />
+          </Key>
+          <Property Name="Id_tarjeta" Type="int" Nullable="false" />
+          <Property Name="saldo_tarjeta" Type="int" Nullable="false" />
+          <Property Name="linea_credito_tarjeta" Type="int" Nullable="false" />
+          <Property Name="Id_Cliente" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id_usuario" />
+          </Key>
+          <Property Name="Id_usuario" Type="int" Nullable="false" />
+          <Property Name="Pass_usuario" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="Retail_Producto_FK1">
+          <End Role="Retail" Type="Self.Retail" Multiplicity="1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Retail">
+              <PropertyRef Name="Id_Retail" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="Id_Retail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Retail_Tarjeta_FK1">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Tarjeta" Type="Self.Tarjeta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id_Cliente" />
+            </Principal>
+            <Dependent Role="Tarjeta">
+              <PropertyRef Name="Id_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BaseDatosRetailModelStoreContainer">
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Retail" EntityType="Self.Retail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tarjeta" EntityType="Self.Tarjeta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="Retail_Producto_FK1" Association="Self.Retail_Producto_FK1">
+            <End Role="Retail" EntitySet="Retail" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="Retail_Tarjeta_FK1" Association="Self.Retail_Tarjeta_FK1">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Tarjeta" EntitySet="Tarjeta" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BaseDatosRetailModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="Id_Cliente" />
+          </Key>
+          <Property Name="Id_Cliente" Type="Int32" Nullable="false" />
+          <Property Name="Nombre_Cliente" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tarjeta" Relationship="Self.Retail_Tarjeta_FK1" FromRole="Cliente" ToRole="Tarjeta" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="Id_producto" />
+          </Key>
+          <Property Name="Id_producto" Type="Int32" Nullable="false" />
+          <Property Name="Nombre_producto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Marca_producto" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Precio_producto" Type="Int32" Nullable="false" />
+          <Property Name="Stock_producto" Type="Int32" Nullable="false" />
+          <Property Name="Fecha_Termino_Subasta" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Id_Retail" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Retail" Relationship="Self.Retail_Producto_FK1" FromRole="Producto" ToRole="Retail" />
+        </EntityType>
+        <EntityType Name="Retail">
+          <Key>
+            <PropertyRef Name="Id_Retail" />
+          </Key>
+          <Property Name="Id_Retail" Type="Int32" Nullable="false" />
+          <Property Name="Nombre_Retail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Direccion_Retail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Producto" Relationship="Self.Retail_Producto_FK1" FromRole="Retail" ToRole="Producto" />
+        </EntityType>
+        <EntityType Name="Tarjeta">
+          <Key>
+            <PropertyRef Name="Id_tarjeta" />
+          </Key>
+          <Property Name="Id_tarjeta" Type="Int32" Nullable="false" />
+          <Property Name="saldo_tarjeta" Type="Int32" Nullable="false" />
+          <Property Name="linea_credito_tarjeta" Type="Int32" Nullable="false" />
+          <Property Name="Id_Cliente" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="Self.Retail_Tarjeta_FK1" FromRole="Tarjeta" ToRole="Cliente" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id_usuario" />
+          </Key>
+          <Property Name="Id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="Pass_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <Association Name="Retail_Tarjeta_FK1">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Tarjeta" Type="Self.Tarjeta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id_Cliente" />
+            </Principal>
+            <Dependent Role="Tarjeta">
+              <PropertyRef Name="Id_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Retail_Producto_FK1">
+          <End Role="Retail" Type="Self.Retail" Multiplicity="1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Retail">
+              <PropertyRef Name="Id_Retail" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="Id_Retail" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BaseDatosRetailEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+          <EntitySet Name="Producto" EntityType="Self.Producto" />
+          <EntitySet Name="Retail" EntityType="Self.Retail" />
+          <EntitySet Name="Tarjeta" EntityType="Self.Tarjeta" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <AssociationSet Name="Retail_Tarjeta_FK1" Association="Self.Retail_Tarjeta_FK1">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Tarjeta" EntitySet="Tarjeta" />
+          </AssociationSet>
+          <AssociationSet Name="Retail_Producto_FK1" Association="Self.Retail_Producto_FK1">
+            <End Role="Retail" EntitySet="Retail" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BaseDatosRetailModelStoreContainer" CdmEntityContainer="BaseDatosRetailEntities">
+          <EntitySetMapping Name="Cliente">
+            <EntityTypeMapping TypeName="BaseDatosRetailModel.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="Id_Cliente" ColumnName="Id_Cliente" />
+                <ScalarProperty Name="Nombre_Cliente" ColumnName="Nombre_Cliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Producto">
+            <EntityTypeMapping TypeName="BaseDatosRetailModel.Producto">
+              <MappingFragment StoreEntitySet="Producto">
+                <ScalarProperty Name="Id_producto" ColumnName="Id_producto" />
+                <ScalarProperty Name="Nombre_producto" ColumnName="Nombre_producto" />
+                <ScalarProperty Name="Marca_producto" ColumnName="Marca_producto" />
+                <ScalarProperty Name="Precio_producto" ColumnName="Precio_producto" />
+                <ScalarProperty Name="Stock_producto" ColumnName="Stock_producto" />
+                <ScalarProperty Name="Fecha_Termino_Subasta" ColumnName="Fecha_Termino_Subasta" />
+                <ScalarProperty Name="Id_Retail" ColumnName="Id_Retail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Retail">
+            <EntityTypeMapping TypeName="BaseDatosRetailModel.Retail">
+              <MappingFragment StoreEntitySet="Retail">
+                <ScalarProperty Name="Id_Retail" ColumnName="Id_Retail" />
+                <ScalarProperty Name="Nombre_Retail" ColumnName="Nombre_Retail" />
+                <ScalarProperty Name="Direccion_Retail" ColumnName="Direccion_Retail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tarjeta">
+            <EntityTypeMapping TypeName="BaseDatosRetailModel.Tarjeta">
+              <MappingFragment StoreEntitySet="Tarjeta">
+                <ScalarProperty Name="Id_tarjeta" ColumnName="Id_tarjeta" />
+                <ScalarProperty Name="saldo_tarjeta" ColumnName="saldo_tarjeta" />
+                <ScalarProperty Name="linea_credito_tarjeta" ColumnName="linea_credito_tarjeta" />
+                <ScalarProperty Name="Id_Cliente" ColumnName="Id_Cliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="BaseDatosRetailModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
+                <ScalarProperty Name="Pass_usuario" ColumnName="Pass_usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
